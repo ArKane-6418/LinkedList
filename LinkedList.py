@@ -26,7 +26,7 @@ class LinkedList:
 #             curr = curr.next
 
     def append(self, item: Any) -> None:
-        """Append an item to the LinkedList
+        """Append <item> to the LinkedList
         """
         new_node = _Node(item)
         if self._first is None:
@@ -38,7 +38,7 @@ class LinkedList:
             curr.next = new_node
 
     def insert(self, index: int, item: Any) -> None:
-        """Insert a the given item at the given index in this LinkedList.
+        """Insert a the given <item> at the given <index> in this LinkedList.
 
         Raise IndexError if index > len(self) or index < 0.
         Note that adding to the end of the list is okay.
@@ -119,9 +119,11 @@ class LinkedList:
             else:
                 curr.next = curr.next.next
 
-    def pop(self, index: Optional[int]) -> Any:
-        """Remove and return the first occurrence of <item> from the LinkedList
+    def pop(self, index: Optional[int] = None) -> Any:
+        """Remove and return the item at <index> from the LinkedList. If <index> is not provided, pop the last item
         """
+        if index is None:
+            popped = self.get(len(self)-1)
         popped = self.get(index)
         self.__delitem__(index)
         return popped
@@ -211,18 +213,19 @@ class LinkedList:
         """
         pass
 
-    def reverse(self) -> LinkedList:
+    def reverse(self) -> None:
+        """Reverse the LinkedList in place
+        """
         curr = self._first
         prev = None
+        temp_next = None
 
-        while True:
-            temp_curr = curr.next
+        while curr:
+            temp_next = curr.next
             curr.next = prev
             prev = curr
-            if not temp_curr:
-                break
-            curr = temp_curr
-        return LinkedList(curr)
+            curr = temp_next
+        self._first = prev
 
 
 if __name__ == "__main__":
