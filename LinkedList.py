@@ -123,7 +123,7 @@ class LinkedList:
         """Remove and return the item at <index> from the LinkedList. If <index> is not provided, pop the last item
         """
         if index is None:
-            popped = self.get(len(self)-1)
+            index = len(self)-1
         popped = self.get(index)
         self.__delitem__(index)
         return popped
